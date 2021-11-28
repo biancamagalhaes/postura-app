@@ -1,0 +1,14 @@
+language: javascript
+node_js:
+  - 14
+cache:
+  directories:
+    - node_modules
+script:
+  - yarn build
+  - yarn start
+deploy:
+  provider: heroku
+  api_key:
+    - secure: $SECURE_KEY
+  app: $APP
