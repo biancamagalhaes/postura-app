@@ -9,19 +9,20 @@ import {
   Legend
 } from 'recharts';
 import { Container, Title } from './style';
-import data from "../../ducks/horas.json";
 
-class SimpleLineChart extends Component {
+type Props = {
+  data: any;
+}
+class SimpleLineChart extends Component<Props>{
   
   render () {
-    console.log(data.horas);
     return (
       <Container>
-          <Title>Gráfico em minutos sentados por mês</Title>
+          <Title>Gráfico em horas sentadas por mês</Title>
           <LineChart
             width={600}
             height={300}
-            data={data.horas}
+            data={this.props.data.horas}
             margin={{top: 5, right: 30, left: 20, bottom: 5}}
             >
             <Line

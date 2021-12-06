@@ -5,11 +5,11 @@ import logo from "../../../public/images/logo.png";
 import image from "../../../public/images/image.png";
 import { Container, StyledImage, LeftContainer } from "./style";
 import Router from "next/router";
-import { getCode, LoginUser } from "../../ducks/user";
+import { getCode, LoginUser, GetJson } from "../../ducks/user";
 import { connect } from "react-redux";
 import TcpServerServer from '../../util/tcpServer';
 
-const Reopening = ({loginUser, loading, code}: any): React.ReactElement => {
+const Reopening = ({loginUser, loading, code, getJson}: any): React.ReactElement => {
 
   const [text, setText] = useState('');
   const [error, setError] = useState('');
@@ -23,7 +23,8 @@ const Reopening = ({loginUser, loading, code}: any): React.ReactElement => {
       Router.push({
         pathname: "/inside"
       });
-    }).catch(() => {
+    }).catch((e) => {
+      console.log(e);
       setError('Chave de acesso não encontrada');
     });
   }
@@ -52,6 +53,7 @@ const Reopening = ({loginUser, loading, code}: any): React.ReactElement => {
   useEffect(() => {
     if(code && code !== ''){
       loginUser(code).then(() => {
+        getJson();
         Router.push({
           pathname: "/inside"
         });
@@ -77,5 +79,6 @@ const Reopening = ({loginUser, loading, code}: any): React.ReactElement => {
 };
 
 export default connect(getCode, (dispatch: any) => ({
-    loginUser: (code: string) => dispatch(LoginUser(code))
+    loginUser: (code: string) => dispatch(LoginUser(code)),
+    getJson: () => dispatch(GetJson()),
 }))(Reopening);

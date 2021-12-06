@@ -1,4 +1,5 @@
 {
+    "horaDeInicio": 0,
     "horas": [
         {"dia": "26/11", "horas": 5},
         {"dia": "27/11", "horas": 8}
